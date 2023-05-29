@@ -6,12 +6,9 @@ import Stripe from 'stripe';
 import useCart from '../(store)/store';
 
 async function getProducts() {
-	const req = new Stripe(
-		'sk_test_51NCV6jC1wLQupbLKBovjeKwqHtY0ATfX4ZCvukfrEKlE7ZT1WbLZcyaYzzqdvvSHkkVzzmdUSwrMlJck3G1jAIDW00kVhksKqU',
-		{
-			apiVersion: '2022-11-15',
-		}
-	);
+	const req = new Stripe(process.env.STRIPE_SECRET, {
+		apiVersion: '2022-11-15',
+	});
 
 	const price = await req.prices.list({
 		expand: ['data.product'],
